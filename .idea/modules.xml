@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CS 249 - Project1/CS 249 - Project1.iml" filepath="$PROJECT_DIR$/CS 249 - Project1/CS 249 - Project1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS 249 - Project2/CS 249 - Project2.iml" filepath="$PROJECT_DIR$/CS 249 - Project2/CS 249 - Project2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS 249 - Project3/CS 249 - Project3.iml" filepath="$PROJECT_DIR$/CS 249 - Project3/CS 249 - Project3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS 249 - Project4/CS 249 - Project4.iml" filepath="$PROJECT_DIR$/CS 249 - Project4/CS 249 - Project4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS 249 - Project5/CS 249 - Project5.iml" filepath="$PROJECT_DIR$/CS 249 - Project5/CS 249 - Project5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS 249 - Test Project/CS 249 - Test Project.iml" filepath="$PROJECT_DIR$/CS 249 - Test Project/CS 249 - Test Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS 249 - Worksheet 1/CS 249 - Worksheet 1.iml" filepath="$PROJECT_DIR$/CS 249 - Worksheet 1/CS 249 - Worksheet 1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS 249 - Worksheet 3/CS 249 - Worksheet 3.iml" filepath="$PROJECT_DIR$/CS 249 - Worksheet 3/CS 249 - Worksheet 3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS 249 - binaryTreeTraversals/CS 249 - binaryTreeTraversals.iml" filepath="$PROJECT_DIR$/CS 249 - binaryTreeTraversals/CS 249 - binaryTreeTraversals.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS 249 - circularList/CS 249 - circularList.iml" filepath="$PROJECT_DIR$/CS 249 - circularList/CS 249 - circularList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS 249 - hashTree/CS 249 - hashTree.iml" filepath="$PROJECT_DIR$/CS 249 - hashTree/CS 249 - hashTree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zac's Attempt/Homework_0/Homework_0.iml" filepath="$PROJECT_DIR$/Zac's Attempt/Homework_0/Homework_0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects.iml" filepath="$PROJECT_DIR$/IdeaProjects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zac's Attempt/Project1/Project1.iml" filepath="$PROJECT_DIR$/Zac's Attempt/Project1/Project1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zac's Attempt/Project2/Project2.iml" filepath="$PROJECT_DIR$/Zac's Attempt/Project2/Project2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zac's Attempt/Project3/Project3.iml" filepath="$PROJECT_DIR$/Zac's Attempt/Project3/Project3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zac's Attempt/Project4/Project4.iml" filepath="$PROJECT_DIR$/Zac's Attempt/Project4/Project4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zac's Attempt/Project5/Project5.iml" filepath="$PROJECT_DIR$/Zac's Attempt/Project5/Project5.iml" />
+    </modules>
+  </component>
+</project>
