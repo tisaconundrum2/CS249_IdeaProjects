@@ -59,7 +59,7 @@ class CircList {
             current.prev = null;
         }else { //we set these two separate nodes to be connected to eachother.
             current.prev.next = current.next;
-            current.next.prev = current.prev
+            current.next.prev = current.prev;
         }
         return "This Node does not exist";
     }
@@ -83,5 +83,6 @@ class CircList {
                 return "Found node: "+current.iData+", "+current.dData;
             }
         }
+        return null;
     }
 }
