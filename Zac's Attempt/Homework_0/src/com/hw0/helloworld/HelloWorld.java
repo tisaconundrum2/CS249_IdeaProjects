@@ -3,19 +3,20 @@ package com.hw0.helloworld;
 /**
  * Created by Zac on 8/27/2014.
  */
-public class HelloWorld {
+public class MyArray {
 
     private int[] myArray;
     private int size;
     //private final int SIZE = 10; //This constant allows us to set the size, but should be set in constructor of myArray
     private int numElem;
 
-
-    public void MyArray(int size) {
-        this.size = size;
+    public MyArray(int i) {
+        size = i;
         this.numElem = 0;
         myArray = new int[size];
     }
+
+
     public void insertNext(int inInt){
         myArray[numElem] = inInt;
         numElem += 1;
@@ -222,7 +223,7 @@ public class HelloWorld {
 
     System.out.println("*** TESTING Insert methods***");
 
-    fillArray(array1);
+    fillArray(array1 int size);
     fillArray(array2);
 
     for(int i=0; i<sample_data.length; i++){
