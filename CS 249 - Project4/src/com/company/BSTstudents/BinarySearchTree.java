@@ -43,7 +43,7 @@ public class BinarySearchTree <Value extends Comparable>{
     }
 
     /**
-     * comments for getSize method
+     * TODO get the size of
      */
     public int getSize() {
         return 0;
@@ -51,7 +51,7 @@ public class BinarySearchTree <Value extends Comparable>{
 
 
     /**
-     * comments for find method
+     * TODO Find a certain Node
      */
     public Value find(Value val) {
         return val;
