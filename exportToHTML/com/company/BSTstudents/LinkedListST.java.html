@@ -1,0 +1,185 @@
+<html>
+<head>
+<title>LinkedListST.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+LinkedListST.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">com.company.BSTstudents; 
+ 
+</span><span class="s2">/** 
+ * Created by User on 4/18/2015. 
+ */</span><span class="s1"> 
+ 
+</span><span class="s2">/************************************************************************* 
+ *  Compilation:  javac LinkedListST.java 
+ *  Execution:    java LinkedListST 
+ * 
+ *  Symbol table implementation with linked list. 
+ * 
+ *  % java LinkedListST 
+ *  128.112.136.11 
+ *  208.216.181.15 
+ *  null 
+ * 
+ *  Remarks 
+ *  ------- 
+ *    - Consider using a sentinel to eliminate annoying special 
+ *      case when deleting at the beginning of the list. 
+ * 
+ *************************************************************************/</span><span class="s1"> 
+ 
+        </span><span class="s0">import </span><span class="s1">java.util.Iterator; 
+        </span><span class="s0">import </span><span class="s1">java.util.NoSuchElementException; 
+ 
+</span><span class="s0">public class </span><span class="s1">LinkedListST&lt;Key, Value&gt; </span><span class="s0">implements </span><span class="s1">Iterable&lt;Key&gt; { 
+ 
+    </span><span class="s0">private int </span><span class="s1">N;           </span><span class="s2">// number of key-value pairs</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Node first;      </span><span class="s2">// the linked list of key-value pairs</span><span class="s1"> 
+ 
+    </span><span class="s2">// a helper linked list data type</span><span class="s1"> 
+    </span><span class="s0">private class </span><span class="s1">Node { 
+        Key key; 
+        Value value; 
+        Node next; 
+ 
+        Node(Key key, Value value, Node next)  { 
+            </span><span class="s0">this</span><span class="s1">.key   = key; 
+            </span><span class="s0">this</span><span class="s1">.value = value; 
+            </span><span class="s0">this</span><span class="s1">.next  = next; 
+        } 
+    } 
+ 
+    </span><span class="s2">// return number of key-value pairs</span><span class="s1"> 
+    </span><span class="s0">public int </span><span class="s1">size() { </span><span class="s0">return </span><span class="s1">N; } 
+ 
+    </span><span class="s2">// does this symbol table contain the given key?</span><span class="s1"> 
+    </span><span class="s0">public boolean </span><span class="s1">contains(Key key) { 
+        </span><span class="s0">for </span><span class="s1">(Node x = first; x != </span><span class="s0">null</span><span class="s1">; x = x.next) 
+            </span><span class="s0">if </span><span class="s1">(key.equals(x.key)) </span><span class="s0">return true</span><span class="s1">; 
+        </span><span class="s0">return false</span><span class="s1">; 
+    } 
+ 
+    </span><span class="s2">// add a key-value pair, replacing old key-value pair if key is already present</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">put(Key key, Value value) { 
+        </span><span class="s0">for </span><span class="s1">(Node x = first; x != </span><span class="s0">null</span><span class="s1">; x = x.next) 
+            </span><span class="s0">if </span><span class="s1">(key.equals(x.key)) { x.value = value; </span><span class="s0">return</span><span class="s1">; } 
+        first = </span><span class="s0">new </span><span class="s1">Node(key, value, first); 
+        N++; 
+    } 
+ 
+    </span><span class="s2">// remove key-value pair with given key, and return associated value</span><span class="s1"> 
+    </span><span class="s2">// return null if no such key</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Value remove(Key key) { 
+        </span><span class="s2">// special cases</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(first == </span><span class="s0">null</span><span class="s1">) </span><span class="s0">return null</span><span class="s1">; 
+ 
+        </span><span class="s0">if </span><span class="s1">(key.equals(first.key)) { 
+            Value val = first.value; 
+            first = first.next; 
+            N--; 
+            </span><span class="s0">return </span><span class="s1">val; 
+        } 
+ 
+        </span><span class="s2">// general case</span><span class="s1"> 
+        </span><span class="s0">for </span><span class="s1">(Node x = first; x.next != </span><span class="s0">null</span><span class="s1">; x = x.next) 
+            </span><span class="s0">if </span><span class="s1">(key.equals(x.next.key)) { 
+                Value val = x.next.value; 
+                x.next = x.next.next; 
+                N--; 
+                </span><span class="s0">return </span><span class="s1">val; 
+            } 
+        </span><span class="s0">return null</span><span class="s1">; 
+    } 
+ 
+    </span><span class="s2">// return the value associated with the key, or null if the key is not present</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Value get(Key key) { 
+        </span><span class="s0">for </span><span class="s1">(Node x = first; x != </span><span class="s0">null</span><span class="s1">; x = x.next) { 
+            </span><span class="s0">if </span><span class="s1">(key.equals(x.key)) </span><span class="s0">return </span><span class="s1">x.value; 
+        } 
+        </span><span class="s0">return null</span><span class="s1">;     </span><span class="s2">// not found</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s2">// a linked list iterator, doesn't implement remove() since it's optional</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Iterator&lt;Key&gt; iterator()  { </span><span class="s0">return new </span><span class="s1">ListIterator(first);  } 
+    </span><span class="s0">private class </span><span class="s1">ListIterator </span><span class="s0">implements </span><span class="s1">Iterator&lt;Key&gt; { 
+        Node current; 
+        ListIterator(Node first)     { current = first;                            } 
+        </span><span class="s0">public boolean </span><span class="s1">hasNext()     { </span><span class="s0">return </span><span class="s1">current != </span><span class="s0">null</span><span class="s1">;                     } 
+        </span><span class="s0">public void </span><span class="s1">remove()         { </span><span class="s0">throw new </span><span class="s1">UnsupportedOperationException();  } 
+ 
+        </span><span class="s0">public </span><span class="s1">Key next() { 
+            </span><span class="s0">if </span><span class="s1">(!hasNext()) </span><span class="s0">throw new </span><span class="s1">NoSuchElementException(); 
+            Key key = current.key; 
+            current = current.next; 
+            </span><span class="s0">return </span><span class="s1">key; 
+        } 
+    } 
+ 
+ 
+ 
+ 
+    </span><span class="s2">/*********************************************************************** 
+     * Test routine. 
+     **********************************************************************/</span><span class="s1"> 
+    </span><span class="s0">public static void </span><span class="s1">main(String[] args) { 
+        LinkedListST&lt;String, String&gt; st = </span><span class="s0">new </span><span class="s1">LinkedListST&lt;String, String&gt;(); 
+ 
+        </span><span class="s2">// insert some key-value pairs</span><span class="s1"> 
+        st.put(</span><span class="s3">&quot;www.cs.princeton.edu&quot;</span><span class="s1">,   </span><span class="s3">&quot;128.112.136.11&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.cs.princeton.edu&quot;</span><span class="s1">,   </span><span class="s3">&quot;128.112.136.35&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.princeton.edu&quot;</span><span class="s1">,      </span><span class="s3">&quot;128.112.130.211&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.math.princeton.edu&quot;</span><span class="s1">, </span><span class="s3">&quot;128.112.18.11&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.yale.edu&quot;</span><span class="s1">,           </span><span class="s3">&quot;130.132.51.8&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.amazon.com&quot;</span><span class="s1">,         </span><span class="s3">&quot;207.171.163.90&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.simpsons.com&quot;</span><span class="s1">,       </span><span class="s3">&quot;209.123.16.34&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.stanford.edu&quot;</span><span class="s1">,       </span><span class="s3">&quot;171.67.16.120&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.google.com&quot;</span><span class="s1">,         </span><span class="s3">&quot;64.233.161.99&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.ibm.com&quot;</span><span class="s1">,            </span><span class="s3">&quot;129.42.16.99&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.apple.com&quot;</span><span class="s1">,          </span><span class="s3">&quot;17.254.0.91&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.slashdot.com&quot;</span><span class="s1">,       </span><span class="s3">&quot;66.35.250.150&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.whitehouse.gov&quot;</span><span class="s1">,     </span><span class="s3">&quot;204.153.49.136&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.espn.com&quot;</span><span class="s1">,           </span><span class="s3">&quot;199.181.132.250&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.snopes.com&quot;</span><span class="s1">,         </span><span class="s3">&quot;66.165.133.65&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.movies.com&quot;</span><span class="s1">,         </span><span class="s3">&quot;199.181.132.250&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.cnn.com&quot;</span><span class="s1">,            </span><span class="s3">&quot;64.236.16.20&quot;</span><span class="s1">); 
+        st.put(</span><span class="s3">&quot;www.iitb.ac.in&quot;</span><span class="s1">,         </span><span class="s3">&quot;202.68.145.210&quot;</span><span class="s1">); 
+ 
+        </span><span class="s2">// search for IP addresses given URL</span><span class="s1"> 
+        System.out.println(</span><span class="s3">&quot;size = &quot; </span><span class="s1">+ st.size()); 
+        System.out.println(st.get(</span><span class="s3">&quot;www.cs.princeton.edu&quot;</span><span class="s1">)); 
+        System.out.println(st.get(</span><span class="s3">&quot;www.amazon.com&quot;</span><span class="s1">)); 
+        System.out.println(st.get(</span><span class="s3">&quot;www.amazon.edu&quot;</span><span class="s1">)); 
+        System.out.println(); 
+ 
+        </span><span class="s2">// test out the iterator</span><span class="s1"> 
+        </span><span class="s0">for </span><span class="s1">(String s : st) 
+            System.out.println(s); 
+ 
+ 
+        </span><span class="s2">// print out all key-value pairs</span><span class="s1"> 
+        </span><span class="s0">for </span><span class="s1">(String s : st) 
+            System.out.println(s + </span><span class="s3">&quot; &quot; </span><span class="s1">+ st.get(s)); 
+        System.out.println(); 
+ 
+        System.out.println(</span><span class="s3">&quot;Deleting&quot;</span><span class="s1">); 
+        System.out.println(st.remove(</span><span class="s3">&quot;www.princeton.edu&quot;</span><span class="s1">)); 
+        System.out.println(st.remove(</span><span class="s3">&quot;www.princeton.edu&quot;</span><span class="s1">)); 
+    } 
+ 
+}</span></pre>
+</body>
+</html>
