@@ -1,25 +1,25 @@
-package com.company.hashTables;
+package com.company.BinaryHashTable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Created by User on 4/22/2015.
+ */
 class HashTreeApp{
     public static void main(String[] args) throws IOException {
-        int aKey;
-        Node aDataItem;
+        int aKey, aDataItem;
         int size, n, keysPerCell = 10;
-// get sizes
+        // get sizes
         System.out.print("Enter size of hash table: ");
         size = getInt();
         System.out.print("Enter initial number of items: ");
         n = getInt();
-// make table
+        // make table
         HashTable theHashTable = new HashTable(size);
         for(int j=0; j<n; j++)  {       // insert data
-            aKey = (int)(java.lang.Math.random() * keysPerCell * size);
-
-            aDataItem = new Node(aKey);
+            aDataItem = (int)(Math.random() * keysPerCell * size);
             theHashTable.insert(aDataItem);
         }
         while(true){                 // interact with user
@@ -32,16 +32,15 @@ class HashTreeApp{
                     break;
                 case 'i':
                     System.out.print("Enter key value to insert: ");
-                    aKey = getInt();
-                    aDataItem = new Node(aKey);
+                    aDataItem = getInt();
                     theHashTable.insert(aDataItem);
                     break;
                 case 'f':
                     System.out.print("Enter key value to find: ");
                     aKey = getInt();
                     aDataItem = theHashTable.find(aKey);
-                    if(aDataItem != null)
-                        System.out.println("Found " + aDataItem.iData);
+                    if(aDataItem != -1)
+                        System.out.println("Found " + aDataItem);
                     else
                         System.out.println("Could not find " + aKey);
                     break;

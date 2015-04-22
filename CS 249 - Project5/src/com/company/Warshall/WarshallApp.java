@@ -1,22 +1,15 @@
-package com.company.Graphs;
+package com.company.Warshall;
 
-import com.company.Graphs.Graph;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-
-
-////////////////////////////////////////////////////////////////
-class WarshallApp{
+class WarshallApp {
     public static void main(String[] args) throws IOException{
         Graph theGraph = new Graph();
-        theGraph.addVertex("A");    // 0
-        theGraph.addVertex("B");    // 1
-        theGraph.addVertex("C");    // 2
-        theGraph.addVertex("D");    // 3
-        theGraph.addVertex("E");    // 4
+        theGraph.addVertex('A');    // 0
+        theGraph.addVertex('B');    // 1
+        theGraph.addVertex('C');    // 2
+        theGraph.addVertex('D');    // 3
+        theGraph.addVertex('E');    // 4
 
         theGraph.addEdge(0, 2);     // AC
         theGraph.addEdge(1, 0);     // BA
@@ -31,3 +24,4 @@ class WarshallApp{
     }  // end main()
 // -------------------------------------------------------------
 }  // end class WarshallApp
+

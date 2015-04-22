@@ -6,8 +6,7 @@ package com.company.BSTstudents;
  * @author 
  * @version 
  * @since 
- */
-/*
+ *
     Implementing Interfaces in Java: implements
 
     In Java, an Interface is a class which contains method definitions with no functionality.
@@ -25,20 +24,22 @@ package com.company.BSTstudents;
 public class SimpleStudent implements Comparable<SimpleStudent> {
 
     private String name;
-    private float gpa;
+    private double gpa;
 
     /**
      * Constructor of our Simple Student
      */
-    public SimpleStudent(String name, float gpa){
+    public SimpleStudent(String name, double gpa){
         this.name = name;
         this.gpa = gpa;
     }
 
+
+
     /**
      * comments
      */
-    public float getGpa(){
+    public double getGpa(){
         return gpa;
     }
 
@@ -55,7 +56,8 @@ public class SimpleStudent implements Comparable<SimpleStudent> {
     @Override
     public String toString(){
 
-        return "";
+        return "Student Name: " + getName()+
+                "Student GPA" + getGpa();
     }
 
     /**
