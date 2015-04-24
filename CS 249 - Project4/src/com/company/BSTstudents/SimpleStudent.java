@@ -56,8 +56,7 @@ public class SimpleStudent implements Comparable<SimpleStudent> {
     @Override
     public String toString(){
 
-        return "Student Name: " + getName()+
-                "Student GPA" + getGpa();
+        return "[Student Name: " + name + " Student GPA: " + gpa + "]";
     }
 
     /**
@@ -81,7 +80,7 @@ public class SimpleStudent implements Comparable<SimpleStudent> {
             return -1;
         }
         /*is positive if our class is 'greater' than the other class.*/
-        else if (other_student.gpa > this.gpa) {
+        else if (other_student.gpa < this.gpa) {
             return 1;
         }
         /*is 0 if our class is equal to the other class*/

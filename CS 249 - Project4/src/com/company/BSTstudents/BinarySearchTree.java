@@ -32,6 +32,9 @@ If this concept is not clear, please research it online and consider visiting of
 You can delete this comment when you no longer need it.
 */
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * The student now has a Name and GPA.
  * call student.getName() to access their name
@@ -40,13 +43,9 @@ You can delete this comment when you no longer need it.
 
 
 public class BinarySearchTree <Value extends Comparable>{
-    private Value root, current; //remember Value can be anything. in this case it will be holding a student
+    private Value key;
+    private Node parent, current, root; //remember Value can be anything. in this case it will be holding a student
     private int n;
-
-    public BinarySearchTree(Value parent){
-        this.root = root;
-        current = root;
-    }
 
     public BinarySearchTree() {
 
@@ -88,39 +87,31 @@ public class BinarySearchTree <Value extends Comparable>{
      * place the element in the left or right
      */
     public void insert(Value val) {
-        Node newNode = new Node(val);//this creates a newNode with the student inside it.
-
-
-
-        if(root == null){
-            root = val; //the root is now pointing to the student value
+        Node newNode = new Node(val); //create the new node to be inserted
+        if(parent == null){ //if the root is null add the newNode to it
+            n++;    //increment our number of items.
+            parent = newNode; //the root is a Value type. Which means that it holds a student.
+            current = parent;   //also add our current to be at the root as well
         }
-        else{
-            current = root;
-            while(true){
-                root = current;
+        else{ //else lets start exploring the depths of the tree
+            //move our current pointer around
+            while (current.leftChild != null && current.val.compareTo(newNode.val) >= 0)
+                current = current.leftChild;
+            while (current.rightChild != null && current.val.compareTo(newNode.val) < 0)
+                current = current.rightChild;
 
-                if(current.compareTo(newNode) < 0){
-                    //System.out.println("True");
-                    current = newNode.leftChild;
-                    if(current == null) {
-                        root.left = newNode;
-                        return;
-                    }
-                }
-                else{
-                    //System.out.println("False");
-                    current = current.right;
-                    if(current == null) {
-                        root.right = newNode;
-                        return;
-                    }
-                }
+            if (current.val.compareTo(newNode.val) >= 0){ //while the current value compared to the newNode is grtr than
+                current.leftChild = newNode; //move to the right side
+                n++; //increment our number of items.
+                current = parent; //put it back at the top;
+
+            }
+            if (current.val.compareTo(newNode.val) < 0){ //while the current value compared to the newNode is less than
+                current.rightChild = newNode; //move to the left side
+                n++; //increment our number of items.
+                current = parent; //put it back at the top;
             }
         }
-
-        n++;
-        return;
     }
 
 
@@ -129,38 +120,120 @@ public class BinarySearchTree <Value extends Comparable>{
      * find the student with the key value
      * delete that Node. Get a successor to
      * replace the deleted Parent
+     *
+     * start at root,
+     * if key value
+     *  delete
+     *  getSuccessor()
+     * else
+     *  while (!null && !key)
+     *      go left or right.
+     *      getSuccessor()
+     *  return does not exist
+     *
      */
-    public void delete(Value val) {
+    public boolean delete(Value key) {
 
+        current = root;
+        Node parent = root;
+        boolean isleftChild = true;
+
+        while(key.compareTo(current.val) != 0 ){
+            parent = current;
+            if(key.compareTo(current.val) < 0){
+                isleftChild = true;
+                current = current.leftChild;
+            }
+            else{
+                isleftChild = false;
+                current = current.rightChild;
+            }
+            if(current == null)
+                return false;
+        }
+
+        if(current.leftChild == null && current.rightChild == null){            //No Children
+            if(current == root)
+                root = null;
+            else if(isleftChild)
+                parent.leftChild= null;
+            else
+                parent.rightChild= null;
+        }
+
+        else if(current.rightChild== null) {                               // 1 Child
+            if (current == root)                                     // If Child is root
+                root = current.leftChild;
+            else if (isleftChild)                                    // If Child was left
+                parent.leftChild= current.leftChild;
+            else
+                parent.rightChild= current.leftChild;
+        }
+
+        else if(current.leftChild== null) {
+            if (current == root)                                     // If Child is root
+                root = current.rightChild;
+            else if (isleftChild)                                    // If Child was right
+                parent.leftChild= current.rightChild;
+            else
+                parent.rightChild= current.rightChild;
+        }
+
+        else {                                                       // 2 Children
+
+            Node successor = getSuccessor(current);
+
+            if(current == root)
+                root = successor;
+            else if(isleftChild)
+                parent.leftChild= successor;
+            else
+                parent.rightChild= successor;
+            successor.leftChild= current.leftChild;
+        }
+        return true;
     }
 
+    private Node getSuccessor(Node delNode){
+
+        Node successorParent = delNode;
+        Node successor = delNode;
+        Node current = delNode.rightChild;
+
+        while(current != null){
+            successorParent = successor;
+            successor = current;
+            current = current.leftChild;
+        }
+
+        if(successor != delNode.rightChild){
+            successorParent.leftChild = successor.rightChild;
+            successor.rightChild = delNode.rightChild;
+        }
+
+        return successor;
+
+    }
 
     /**
      * TODO Print the BST in Level Order.
      * Utilize your BST methods from your previous
      * assignment
      */
-    public void printLevelOrder(){
+
+    public void printLevelOrder() {
+        System.out.print(parent);
+
     }
 
 
-    /**
-     * TODO BST Node
-     * It should have these
-     *
-     * [Node    ]
-     * [val     ]
-     * [Left Ch ]
-     * [Right Ch]
-     * [student ]
-     *
-     * [student ]
-     * [name    ]
-     * [gpa     ]
-     */
+
+
 
     private class Node {
         /**
+         * TODO BST Node
+         * It should have these
          * remember the value can be anything
          * Node
          * [Value   ]
@@ -173,12 +246,11 @@ public class BinarySearchTree <Value extends Comparable>{
          * [GPA           ]
          */
 
-        SimpleStudent student;
         Node leftChild;
         Node rightChild;
         Value val;
 
-        public void setVal(val){
+        public void setVal(Value val){
             this.val = val;
         }
 
@@ -193,11 +265,11 @@ public class BinarySearchTree <Value extends Comparable>{
         }
         /**
          * Comments for toString override
+         * print the actual tree.
          */
         @Override
         public String toString(){
-            return "[Name: "+ student.getName() +
-                    "GPA: "+ student.getGpa() + "]";
+            return val.toString();
         }
     }
 }
