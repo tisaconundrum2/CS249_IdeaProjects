@@ -23,14 +23,15 @@ public class BinarySearchTreeApp {
         BinarySearchTree bst = new BinarySearchTree();
         student =  new SimpleStudent("Nick", 3.1);
         bst.insert(student);
-        student =  new SimpleStudent("Nick", 3.1);
+        student =  new SimpleStudent("John", 4.0);
         bst.insert(student);
-        student =  new SimpleStudent("Nick", 3.1);
+        student =  new SimpleStudent("Jacob", 2.2);
         bst.insert(student);
-        student =  new SimpleStudent("Nick", 3.1);
+        student =  new SimpleStudent("Eric", 3.1);
         bst.insert(student);
-        student =  new SimpleStudent("Nick", 3.1);
+        student =  new SimpleStudent("Bat", 2.4);
         bst.insert(student);
+        bst.printLevelOrder();
 
     }
 }
