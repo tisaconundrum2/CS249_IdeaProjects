@@ -73,10 +73,18 @@ public class BinarySearchTree <Value extends Comparable>{
     /**
      * TODO Find a certain Node
      */
-    public Value find(Value val) {
-        Value key = val;
-
-        return val;
+    public Node find(Value key) { // (assumes non-empty tree)
+        current = parent; // start at root
+        while(key.compareTo(current.val) != 0 ) // while no match,
+        {
+            if(key.compareTo(current.val) < 0)// go left?
+                current = current.leftChild;
+            else
+                current = current.rightChild; // or go right?
+            if(current == null) // if no child,
+                return null; // didn't find it
+        }
+        return current; // found it
     }
 
 
@@ -132,12 +140,18 @@ public class BinarySearchTree <Value extends Comparable>{
      *  return does not exist
      *
      */
-    public boolean delete(Value key) {
+    public String delete(Value key){
+        if (deleted(key)){
+            return key + " was Deleted\n";
+        }
+        else {
+            return key + " doesn't seem to exist.\n";
+        }
+    }
 
-        current = root;
-        Node parent = root;
+    private boolean deleted(Value key) {
+        current = parent;
         boolean isleftChild = true;
-
         while(key.compareTo(current.val) != 0 ){
             parent = current;
             if(key.compareTo(current.val) < 0){
@@ -160,7 +174,6 @@ public class BinarySearchTree <Value extends Comparable>{
             else
                 parent.rightChild= null;
         }
-
         else if(current.rightChild== null) {                               // 1 Child
             if (current == root)                                     // If Child is root
                 root = current.leftChild;
@@ -222,7 +235,18 @@ public class BinarySearchTree <Value extends Comparable>{
      */
 
     public void printLevelOrder() {
-        System.out.print(parent);
+        Node localRoot = parent;
+        Queue node = new LinkedList();
+        if (localRoot != null)
+            node.add(localRoot);
+        while (!node.isEmpty()){
+            Node next = (Node) node.remove();
+            System.out.println(next + " ");
+            if (next.leftChild != null)
+                node.add(next.leftChild);
+            if (next.rightChild != null)
+                node.add(next.rightChild);
+        }
 
     }
 
@@ -230,7 +254,7 @@ public class BinarySearchTree <Value extends Comparable>{
 
 
 
-    private class Node {
+    public class Node<T> {
         /**
          * TODO BST Node
          * It should have these
